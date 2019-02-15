@@ -21,7 +21,7 @@
                     >{{tpl.ttl}}</a>
                 </div>
                 <div class="detail_win">
-                    <img :src="'http://localhost:8000/images/m/1/templates/' + tabOn.ttl + '.png'" />
+                    <img v-if="tabOn.ttl" :src="'http://localhost:8000/images/m/1/templates/' + tabOn.ttl + '.png'" />
                 </div>
             </div>
             <ul class="btn_group">

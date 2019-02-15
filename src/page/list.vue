@@ -17,7 +17,7 @@
                                 style: style,
                                 script: script
                             }}">
-                            <img :src="'http://localhost:8000/images/m/1/templates/' + item.ttl + '.png'" />
+                            <img :src="'http://localhost:8000/images/m/1/cats2/' + item.ttl + '.png'" />
                         </router-link>
                     </dt>
                     <dd>{{item.ttl}}</dd>
