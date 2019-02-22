@@ -76,10 +76,14 @@ export default {
     width: 200px;
     margin: 0 20px 20px 0;
     dt {
+        display: table-cell;
         width: 100%;
         height: 200px;
+        padding: 10px;
         background: #eee;
         overflow: hidden;
+        vertical-align: middle;
+        text-align: center;
     }
     dd {
         text-align: center;
