@@ -25,15 +25,24 @@
                 </div>
             </div>
             <ul class="btn_group">
+                <a v-if="copyObj.angular" class="copy-angular" @click="copyCode('copy-angular')" :data-clipboard-text="copyObj.angular">angular复制</a>
+                <a v-if="copyObj.react" class="copy-react" @click="copyCode('copy-react')" :data-clipboard-text="copyObj.react">react复制</a>
                 <a v-if="copyObj.html" class="copy-html" @click="copyCode('copy-html')" :data-clipboard-text="copyObj.html">html复制</a>
                 <a v-if="copyObj.vue" class="copy-vue" @click="copyCode('copy-vue')" :data-clipboard-text="copyObj.vue">vue复制</a>
                 <a v-if="copyObj.css" class="copy-css" @click="copyCode('copy-css')" :data-clipboard-text="copyObj.css">css复制</a>
                 <a v-if="copyObj.less" class="copy-less" @click="copyCode('copy-less')" :data-clipboard-text="copyObj.less">less复制</a>
                 <a v-if="copyObj.scss" class="copy-scss" @click="copyCode('copy-scss')" :data-clipboard-text="copyObj.scss">scss复制</a>
                 <a v-if="copyObj.js" class="copy-js" @click="copyCode('copy-js')" :data-clipboard-text="copyObj.js">js复制</a>
+                <a v-if="copyObj.angularJs" class="copy-angularJs" @click="copyCode('copy-angularJs')" :data-clipboard-text="copyObj.angularJs">angularJs复制</a>
                 <a v-if="copyObj.jsData" class="copy-jsData" @click="copyCode('copy-jsData')" :data-clipboard-text="copyObj.jsData">jsData复制</a>
                 <a v-if="copyObj.jsMethods" class="copy-jsMethods" @click="copyCode('copy-jsMethods')" :data-clipboard-text="copyObj.jsMethods">jsMethods复制</a>
+                <a v-if="copyObj.ES6Data" class="copy-ES6Data" @click="copyCode('copy-ES6Data')" :data-clipboard-text="copyObj.ES6Data">ES6Data复制</a>
                 <a v-if="copyObj.ES6Methods" class="copy-ES6Methods" @click="copyCode('copy-ES6Methods')" :data-clipboard-text="copyObj.ES6Methods">ES6Methods复制</a>
+                <a v-if="copyObj.mounted" class="copy-mounted" @click="copyCode('copy-mounted')" :data-clipboard-text="copyObj.mounted">mounted复制</a>
+                <a v-if="copyObj.jsImport" class="copy-jsImport" @click="copyCode('copy-jsImport')" :data-clipboard-text="copyObj.jsImport">jsImport复制</a>
+                <a v-if="copyObj.vueImport" class="copy-vueImport" @click="copyCode('copy-vueImport')" :data-clipboard-text="copyObj.vueImport">vueImport复制</a>
+                <a v-if="copyObj.angularImport" class="copy-angularImport" @click="copyCode('copy-angularImport')" :data-clipboard-text="copyObj.angularImport">angularImport复制</a>
+                <a v-if="copyObj.reactImport" class="copy-reactImport" @click="copyCode('copy-reactImport')" :data-clipboard-text="copyObj.reactImport">reactImport复制</a>
             </ul>
             <div class="detail_btns">
                 <router-link target="_blank" :to="{name: 'edit',query: {tpl: type+'|'+attr+'|'+tabOn.ttl}}" class="btn_mid">展示 + 编辑</router-link>
@@ -84,15 +93,24 @@ export default {
             tpls: [],
             tabOn: {},
             copyObj: {
+                angular: '',
+                react: '',
                 html: '',
                 vue: '',
                 css: '',
                 less: '',
                 scss: '',
                 js: '',
+                angularJs: '',
                 jsData: '',
+                ES6Data: '',
                 jsMethods: '',
-                ES6Methods: ''
+                ES6Methods: '',
+                mounted: '',
+                jsImport: '',
+                vueImport: '',
+                angularImport: '',
+                reactImport: ''
             },
             copyAll: ''
         }
@@ -114,6 +132,17 @@ export default {
                 _script = 'jsData|jsMethods'
             }
             return _frame + '|' + _style + '|' + _script
+        }
+    },
+    watch: {
+        frame () {
+            this.copyData()
+        },
+        style () {
+            this.copyData()
+        },
+        script () {
+            this.copyData()
         }
     },
     mounted () {

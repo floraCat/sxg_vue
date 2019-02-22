@@ -1,6 +1,6 @@
 <template>
     <div class="site_footer">
-footer
+@2019
     </div>
 </template>
 
@@ -11,3 +11,9 @@ export default {
     }
 }
 </script>
+<style lang="scss">
+.site_footer {
+    text-align: center;
+    background: #ddd;
+}
+</style>

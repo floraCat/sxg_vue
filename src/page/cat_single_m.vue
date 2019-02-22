@@ -74,7 +74,15 @@ export default {
 .list_item {
     float: left;
     width: 200px;
-    background: #eee;
     margin: 0 20px 20px 0;
+    dt {
+        width: 100%;
+        height: 200px;
+        background: #eee;
+        overflow: hidden;
+    }
+    dd {
+        text-align: center;
+    }
 }
 </style>
