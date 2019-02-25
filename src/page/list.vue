@@ -3,27 +3,11 @@
         <Header></Header>
         <bar-select></bar-select>
         <tab-cat-m></tab-cat-m>
-        <div class="container_list">
-            <ol>
-                <dl class="list_item" v-for="item in items" v-bind:key="item._id">
-                    <dt>
-                        <router-link :to="{
-                            name: 'detail',
-                            query: {
-                                cat2: item._id,
-                                type: type,
-                                attr: attr,
-                                frame: frame,
-                                style: style,
-                                script: script
-                            }}">
-                            <img :src="'http://localhost:8000/images/m/1/cats2/' + item.ttl + '.png'" />
-                        </router-link>
-                    </dt>
-                    <dd>{{item.ttl}}</dd>
-                </dl>
-            </ol>
-        </div>
+        <list 
+            :items="items" 
+            name="detail" 
+            :opts="type+'|'+attr+'|'+frame+'|'+style+'|'+script"
+        ></list>
         <Footer></Footer>
     </div>
 </template>
@@ -31,6 +15,7 @@
 <script>
 import Header from './layout/header'
 import Footer from './layout/footer'
+import List from './components/list'
 import barSelect from './components/bar-select'
 import tabCatM from './components/tab-cat-m'
 import { mapState } from 'vuex'
@@ -39,11 +24,13 @@ export default {
     components: {
         Header,
         Footer,
+        List,
         barSelect,
         tabCatM
     },
     data () {
         return {
+            level: 'cats2',
             items: []
         }
     },
@@ -65,12 +52,15 @@ export default {
         getList () {
             let self = this
             this.axios({
-                url: self.Host + '/list?db=cats2&cat1=' + self.$route.query.cat1,
+                url: self.Host + '/list?db=cats2&cat1=' + self.$route.query.cat,
                 method: 'GET'
             }).then((res) => {
                 console.log('二级分类')
                 console.log(res)
                 self.items = res.data
+                for (let i = 0, len = self.items.length; i < len; i ++) {
+                    self.items[i].path = self.$store.state.type + '/' + self.$store.state.attr + '/' + self.level + '/' + self.items[i].ttl;
+                }
             })
         }
     }
@@ -78,18 +68,5 @@ export default {
 </script>
 
 <style lang = 'scss'>
-.container_list {
-    width:900px;
-    margin: 20px auto;
-    ol {
-        width: 950px;
-        overflow: hidden;
-    }
-}
-.list_item {
-    float: left;
-    width: 200px;
-    background: #eee;
-    margin: 0 20px 20px 0;
-}
+
 </style>

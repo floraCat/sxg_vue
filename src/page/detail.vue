@@ -123,6 +123,9 @@ export default {
             style: state => state.style,
             script: state => state.script
         }),
+        opts () {
+            return this.$route.query.opts.split('|');
+        },
         // 框架|样式|脚本
         mode () {
             let _frame = this.$store.state.frame
@@ -147,11 +150,11 @@ export default {
     },
     mounted () {
         // 保存状态
-        this.$store.commit('type', this.$route.query.type)
-        this.$store.commit('attr', parseInt(this.$route.query.attr))
-        this.$store.commit('frame', this.$route.query.frame)
-        this.$store.commit('style', this.$route.query.style)
-        this.$store.commit('script', this.$route.query.script)
+        this.$store.commit('type', this.opts[0])
+        this.$store.commit('attr', parseInt(this.opts[1]))
+        this.$store.commit('frame', this.opts[2])
+        this.$store.commit('style', this.opts[3])
+        this.$store.commit('script', this.opts[4])
         this.getList()
     },
     methods: {
@@ -159,7 +162,7 @@ export default {
         getList () {
             let self = this
             this.axios({
-                url: self.Host + '/list?db=templates&cat2=' + self.$route.query.cat2,
+                url: self.Host + '/list?db=templates&cat2=' + self.$route.query.cat,
                 method: 'GET'
             }).then((res) => {
                 console.log('模板')
