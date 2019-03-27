@@ -59,7 +59,7 @@ export default {
                 console.log(res)
                 self.items = res.data
                 for (let i = 0, len = self.items.length; i < len; i ++) {
-                    self.items[i].path = self.$store.state.type + '/' + self.$store.state.attr + '/' + self.level + '/' + self.items[i].ttl;
+                    self.items[i].path = self.$store.state.type + '/' + self.$store.state.attr + '/' + self.level + '/' + self.items[i].en;
                 }
             })
         }
